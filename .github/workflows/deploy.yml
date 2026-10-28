@@ -23,7 +23,8 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - run: npm ci
+      # `npm ci` rejects the Mac-generated lockfile (missing optional @emnapi packages).
+      - run: npm install --no-audit --no-fund
       - run: npm run build
       # Unknown URLs fall back to the app shell, which renders the "not found" page.
       - run: cp dist/portfolio/browser/index.csr.html dist/portfolio/browser/404.html
